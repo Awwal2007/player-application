@@ -166,13 +166,39 @@
             gap: 10px;
         }
 
+        /* Preview Button Styles */
+        .preview-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto 20px;
+            padding: 15px;
+            background: linear-gradient(to right, var(--primary), #e56b00);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .preview-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .preview-btn:active {
+            transform: translateY(0);
+        }
+
         .submit-btn {
             display: block;
             width: 100%;
             max-width: 300px;
-            margin: 30px auto 0;
+            margin: 0 auto;
             padding: 15px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, var(--secondary), #003018);
             color: white;
             border: none;
             border-radius: 8px;
@@ -189,6 +215,13 @@
 
         .submit-btn:active {
             transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .footer {
@@ -358,7 +391,7 @@
             display: none;
             text-align: center;
             margin-top: 15px;
-        }
+}
 
         .preview-image {
             max-width: 200px;
@@ -409,6 +442,190 @@
             align-items: start;
         }
 
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .preview-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .preview-section:last-child {
+            border-bottom: none;
+        }
+
+        .preview-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .preview-title i {
+            margin-right: 10px;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .preview-item {
+            margin-bottom: 12px;
+        }
+
+        .preview-label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .preview-value {
+            color: var(--gray);
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .preview-value.empty {
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .preview-image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .preview-image-large {
+            max-width: 250px;
+            max-height: 250px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+        }
+
+        .modal-footer {
+            padding: 20px 30px 30px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn-cancel {
+            background: #f1f5f9;
+            color: var(--gray);
+        }
+
+        .modal-btn-cancel:hover {
+            background: #e2e8f0;
+        }
+
+        .modal-btn-submit {
+            background: linear-gradient(to right, var(--secondary), #003018);
+            color: white;
+        }
+
+        .modal-btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 73, 36, 0.3);
+        }
+
+        .modal-btn-submit:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
         @media (max-width: 768px) {
             .form-group {
                 flex: 1 1 100%;
@@ -430,13 +647,26 @@
             .photo-section {
                 grid-template-columns: 1fr;
             }
+            
+            .preview-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="./image/telu-logo.png" alt="telu logo">
+            <img src="./image/telu-logo.png" alt="">
+            <h1>Telu Football Club</h1>
             <p>Player Registration & Screening Form</p>
             <p><strong>Screening Date:</strong> 3rd January, 2025</p>
         </div>
@@ -598,12 +828,8 @@
                 <h2 class="section-title"><i class="fas fa-running"></i> Player Profile</h2>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Position</label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="text" id="position" name="position">
-                            </div>
-                        </div>
+                        <label for="position">Position</label>
+                        <input type="text" id="position" name="position" placeholder="e.g., Striker, Midfielder, Defender">
                     </div>
                     <div class="form-group">
                         <label>Strongest Leg</label>
@@ -673,8 +899,13 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="submit-btn">
+            <!-- Preview Button -->
+            <button type="button" class="preview-btn" id="previewBtn">
+                <i class="fas fa-eye"></i> Preview Your Details
+            </button>
+
+            <!-- Submit Button (Hidden initially) -->
+            <button type="submit" class="submit-btn" style="display: none;" id="submitBtn">
                 <i class="fas fa-paper-plane"></i> Submit Registration
             </button>
         </form>
@@ -685,14 +916,146 @@
         </div>
     </div>
 
+    <!-- Preview Modal -->
+    <div class="modal-overlay" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-check"></i> Review Your Registration Details</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="preview-section">
+                    <h3 class="preview-title"><i class="fas fa-user"></i> Personal Information</h3>
+                    <div class="preview-image-container" id="modalPhotoPreview">
+                        <!-- Photo will be inserted here -->
+                    </div>
+                    <div class="preview-grid">
+                        <div class="preview-item">
+                            <div class="preview-label">Full Name</div>
+                            <div class="preview-value" id="previewFullName">Not provided</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Date of Birth</div>
+                            <div class="preview-value" id="previewDOB">Not provided</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Age</div>
+                            <div class="preview-value" id="previewAge">Not provided</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Phone Number</div>
+                            <div class="preview-value" id="previewPhone">Not provided</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Email Address</div>
+                            <div class="preview-value" id="previewEmail">Not provided</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Residential Address</div>
+                            <div class="preview-value" id="previewAddress">Not provided</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <h3 class="preview-title"><i class="fas fa-futbol"></i> Football Background</h3>
+                    <div class="preview-grid">
+                        <div class="preview-item">
+                            <div class="preview-label">Previous Club(s)</div>
+                            <div class="preview-value" id="previewPreviousClub">None provided</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Current Club</div>
+                            <div class="preview-value" id="previewCurrentClub">None provided</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Competitions Played</div>
+                            <div class="preview-value" id="previewCompetitions">None selected</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <h3 class="preview-title"><i class="fas fa-user-tie"></i> Manager/Coach Details</h3>
+                    <div class="preview-grid">
+                        <div class="preview-item">
+                            <div class="preview-label">Manager/Coach Name</div>
+                            <div class="preview-value" id="previewManagerName">None provided</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Manager/Coach Contact</div>
+                            <div class="preview-value" id="previewManagerContact">None provided</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <h3 class="preview-title"><i class="fas fa-running"></i> Player Profile</h3>
+                    <div class="preview-grid">
+                        <div class="preview-item">
+                            <div class="preview-label">Position</div>
+                            <div class="preview-value" id="previewPosition">Not specified</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Strongest Leg</div>
+                            <div class="preview-value" id="previewLeg">Not specified</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Strongest Ability</div>
+                            <div class="preview-value" id="previewAbility">Not specified</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <h3 class="preview-title"><i class="fas fa-heartbeat"></i> Health Information</h3>
+                    <div class="preview-item">
+                        <div class="preview-label">Health Conditions</div>
+                        <div class="preview-value" id="previewHealth">No health conditions specified</div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <h3 class="preview-title"><i class="fas fa-handshake"></i> Commitment</h3>
+                    <div class="preview-grid">
+                        <div class="preview-item">
+                            <div class="preview-label">Ready to join TELU FC?</div>
+                            <div class="preview-value" id="previewJoinClub">Not specified</div>
+                        </div>
+                        <div class="preview-item">
+                            <div class="preview-label">Ready for screening on Jan 3?</div>
+                            <div class="preview-value" id="previewScreening">Not specified</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" id="modalCancel">Edit Details</button>
+                <button class="modal-btn modal-btn-submit" id="modalSubmit">
+                    <i class="fas fa-paper-plane"></i> Confirm & Submit
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('playerForm');
+            const previewBtn = document.getElementById('previewBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const previewModal = document.getElementById('previewModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalCancel = document.getElementById('modalCancel');
+            const modalSubmit = document.getElementById('modalSubmit');
             const successMessage = document.getElementById('successMessage');
+            
+            // Form elements
             const dobInput = document.getElementById('dob');
-            const ageAutoInput = document.getElementById('ageAuto');
             const ageManualInput = document.getElementById('ageManual');
-            const ageDisplay = document.getElementById('ageDisplay');
             
             // Image upload elements
             const uploadContainer = document.getElementById('uploadContainer');
@@ -703,93 +1066,161 @@
             const removeImageBtn = document.getElementById('removeImage');
             
             let uploadedImage = null;
+            let isSubmitting = false;
             
             // Image upload functionality
-            browseBtn.addEventListener('click', function() {
-                playerPhotoInput.click();
+            initializeImageUpload();
+            
+            // Set date limits for age validation
+            setDateLimits();
+            
+            // Preview button click event
+            previewBtn.addEventListener('click', function() {
+                if (validateForm()) {
+                    updatePreviewModal();
+                    previewModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
             });
             
-            uploadContainer.addEventListener('click', function(e) {
-                if (e.target !== browseBtn && e.target !== playerPhotoInput) {
+            // Modal close events
+            modalClose.addEventListener('click', closeModal);
+            modalCancel.addEventListener('click', closeModal);
+            
+            // Click outside modal to close
+            previewModal.addEventListener('click', function(e) {
+                if (e.target === previewModal) {
+                    closeModal();
+                }
+            });
+            
+            // Modal submit button click - SIMPLIFIED
+            modalSubmit.addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Confirm Submission',
+                    text: 'Are you sure you want to submit your registration?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#004924',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, submit!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        closeModal();
+                        submitRegistration();
+                    }
+                });
+            });
+            
+            // Form submission - REMOVED SweetAlert from here
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Show modal instead of submitting directly
+                if (validateForm()) {
+                    updatePreviewModal();
+                    previewModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+            
+            function initializeImageUpload() {
+                browseBtn.addEventListener('click', function() {
                     playerPhotoInput.click();
-                }
-            });
-            
-            playerPhotoInput.addEventListener('change', function() {
-                if (this.files && this.files[0]) {
-                    const file = this.files[0];
-                    
-                    // Validate file type
-                    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-                    if (!validTypes.includes(file.type)) {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'Please upload a valid image file (JPG or PNG only).',
-                            confirmButtonColor: '#004924'
-                        });
-                        return;
-                    }
-                    
-                    // Validate file size (5MB max)
-                    if (file.size > 5 * 1024 * 1024) {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'File size too large. Maximum size is 5MB.',
-                            confirmButtonColor: '#004924'
-                        });
-                        return;
-                    }
-                    
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        previewImage.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                        uploadContainer.style.borderStyle = 'solid';
-                        uploadContainer.style.borderColor = '#10b981';
-                        uploadedImage = file;
-                    }
-                    
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // Drag and drop functionality
-            uploadContainer.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                this.classList.add('drag-over');
-            });
-            
-            uploadContainer.addEventListener('dragleave', function() {
-                this.classList.remove('drag-over');
-            });
-            
-            uploadContainer.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.classList.remove('drag-over');
+                });
                 
-                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                    playerPhotoInput.files = e.dataTransfer.files;
+                uploadContainer.addEventListener('click', function(e) {
+                    if (e.target !== browseBtn && e.target !== playerPhotoInput) {
+                        playerPhotoInput.click();
+                    }
+                });
+                
+                playerPhotoInput.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        const file = this.files[0];
+                        
+                        // Validate file type
+                        const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                        if (!validTypes.includes(file.type)) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Warning',
+                                text: 'Please upload a valid image file (JPG or PNG only).',
+                                confirmButtonColor: '#004924'
+                            });
+                            return;
+                        }
+                        
+                        // Validate file size (5MB max)
+                        if (file.size > 5 * 1024 * 1024) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Warning',
+                                text: 'File size too large. Maximum size is 5MB.',
+                                confirmButtonColor: '#004924'
+                            });
+                            return;
+                        }
+                        
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result;
+                            imagePreview.style.display = 'block';
+                            uploadContainer.style.borderStyle = 'solid';
+                            uploadContainer.style.borderColor = '#10b981';
+                            uploadedImage = file;
+                        }
+                        
+                        reader.readAsDataURL(file);
+                    }
+                });
+                
+                // Drag and drop functionality
+                uploadContainer.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+                
+                uploadContainer.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                
+                uploadContainer.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
                     
-                    // Trigger change event
-                    const event = new Event('change', { bubbles: true });
-                    playerPhotoInput.dispatchEvent(event);
-                }
-            });
+                    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                        playerPhotoInput.files = e.dataTransfer.files;
+                        
+                        // Trigger change event
+                        const event = new Event('change', { bubbles: true });
+                        playerPhotoInput.dispatchEvent(event);
+                    }
+                });
+                
+                // Remove image functionality
+                removeImageBtn.addEventListener('click', function() {
+                    previewImage.src = '';
+                    imagePreview.style.display = 'none';
+                    uploadContainer.style.borderStyle = 'dashed';
+                    uploadContainer.style.borderColor = '#cbd5e1';
+                    playerPhotoInput.value = '';
+                    uploadedImage = null;
+                });
+            }
             
-            // Remove image functionality
-            removeImageBtn.addEventListener('click', function() {
-                previewImage.src = '';
-                imagePreview.style.display = 'none';
-                uploadContainer.style.borderStyle = 'dashed';
-                uploadContainer.style.borderColor = '#cbd5e1';
-                playerPhotoInput.value = '';
-                uploadedImage = null;
-            });
+            function setDateLimits() {
+                const today = new Date();
+                const maxDate = new Date();
+                maxDate.setFullYear(today.getFullYear() - 16);
+                dobInput.max = maxDate.toISOString().split('T')[0];
+                
+                const minDate = new Date();
+                minDate.setFullYear(today.getFullYear() - 45);
+                dobInput.min = minDate.toISOString().split('T')[0];
+            }
             
-            // Calculate age from date of birth
             function calculateAge(birthDate) {
                 const today = new Date();
                 let age = today.getFullYear() - birthDate.getFullYear();
@@ -801,56 +1232,6 @@
                 return age;
             }
             
-            // Update age when date of birth changes
-            // dobInput.addEventListener('change', function() {
-            //     if (this.value) {
-            //         const birthDate = new Date(this.value);
-            //         const age = calculateAge(birthDate);
-                    
-            //         // Update auto-calculated age field
-            //         ageAutoInput.value = age + ' years';
-                    
-            //         // Show age display with formatted text
-            //         ageDisplay.textContent = `Player Age: ${age} years`;
-            //         ageDisplay.style.display = 'inline-block';
-                    
-            //         // Pre-fill manual age field if empty
-            //         if (!ageManualInput.value) {
-            //             ageManualInput.value = age;
-            //         }
-                    
-            //         // Validate age range for football (typically 16-45)
-            //         if (age < 16) {
-            //             ageDisplay.style.backgroundColor = '#fef2f2';
-            //             ageDisplay.style.color = '#dc2626';
-            //             ageDisplay.innerHTML = `Player Age: ${age} years <span style="font-size:0.8em;">(Minimum age is 16)</span>`;
-            //         } else if (age > 45) {
-            //             ageDisplay.style.backgroundColor = '#fef2f2';
-            //             ageDisplay.style.color = '#dc2626';
-            //             ageDisplay.innerHTML = `Player Age: ${age} years <span style="font-size:0.8em;">(Maximum age is 45)</span>`;
-            //         } else {
-            //             ageDisplay.style.backgroundColor = '#e0f2fe';
-            //             ageDisplay.style.color = 'var(--primary)';
-            //         }
-            //     } else {
-            //         ageAutoInput.value = '';
-            //         ageDisplay.style.display = 'none';
-            //     }
-            // });
-            
-            // Sync manual age with auto-calculated age if user changes it
-            // ageManualInput.addEventListener('input', function() {
-            //     const manualAge = parseInt(this.value);
-            //     if (!isNaN(manualAge) && manualAge > 0) {
-            //         if (manualAge < 16 || manualAge > 45) {
-            //             document.getElementById('ageError').style.display = 'block';
-            //         } else {
-            //             document.getElementById('ageError').style.display = 'none';
-            //         }
-            //     }
-            // });
-            
-            // Form validation
             function validateForm() {
                 let isValid = true;
                 const requiredFields = form.querySelectorAll('[required]');
@@ -930,74 +1311,221 @@
                 return isValid;
             }
             
-            // Form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+            function updatePreviewModal() {
+                // Calculate age
+                let finalAge;
+                const manualAge = parseInt(ageManualInput.value);
+                const dobValue = dobInput.value;
                 
-                if (validateForm()) {
-                    // Collect form data
-                    const formData = new FormData();
+                if (dobValue) {
+                    const birthDate = new Date(dobValue);
+                    const calculatedAge = calculateAge(birthDate);
                     
-                    // Add the uploaded image if exists
-                    if (uploadedImage) {
-                        formData.append('playerPhoto', uploadedImage);
+                    if (!isNaN(manualAge) && manualAge >= 16 && manualAge <= 45) {
+                        finalAge = manualAge;
+                    } else {
+                        finalAge = calculatedAge;
                     }
+                }
+                
+                // Update photo preview in modal
+                const modalPhotoPreview = document.getElementById('modalPhotoPreview');
+                if (uploadedImage) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        modalPhotoPreview.innerHTML = `
+                            <img src="${e.target.result}" class="preview-image-large" alt="Player Photo">
+                            <p style="margin-top: 10px; color: var(--gray);">Player Photo</p>
+                        `;
+                    };
+                    reader.readAsDataURL(uploadedImage);
+                } else {
+                    modalPhotoPreview.innerHTML = `
+                        <div style="padding: 30px; background: #f8fafc; border-radius: 10px; color: var(--gray);">
+                            <i class="fas fa-user-circle" style="font-size: 4rem; margin-bottom: 10px;"></i>
+                            <p>No photo uploaded</p>
+                        </div>
+                    `;
+                }
+                
+                // Update personal information
+                document.getElementById('previewFullName').textContent = 
+                    document.getElementById('fullName').value || 'Not provided';
+                document.getElementById('previewFullName').className = 
+                    document.getElementById('fullName').value ? 'preview-value' : 'preview-value empty';
+                
+                document.getElementById('previewDOB').textContent = 
+                    formatDate(dobInput.value) || 'Not provided';
+                document.getElementById('previewDOB').className = 
+                    dobInput.value ? 'preview-value' : 'preview-value empty';
+                
+                document.getElementById('previewAge').textContent = 
+                    finalAge ? `${finalAge} years` : 'Not provided';
+                document.getElementById('previewAge').className = 
+                    finalAge ? 'preview-value' : 'preview-value empty';
+                
+                document.getElementById('previewPhone').textContent = 
+                    document.getElementById('phone').value || 'Not provided';
+                document.getElementById('previewPhone').className = 
+                    document.getElementById('phone').value ? 'preview-value' : 'preview-value empty';
+                
+                document.getElementById('previewEmail').textContent = 
+                    document.getElementById('email').value || 'Not provided';
+                document.getElementById('previewEmail').className = 
+                    document.getElementById('email').value ? 'preview-value' : 'preview-value empty';
+                
+                document.getElementById('previewAddress').textContent = 
+                    document.getElementById('address').value || 'Not provided';
+                document.getElementById('previewAddress').className = 
+                    document.getElementById('address').value ? 'preview-value' : 'preview-value empty';
+                
+                // Update football background
+                document.getElementById('previewPreviousClub').textContent = 
+                    document.getElementById('previousClub').value || 'None';
+                document.getElementById('previewPreviousClub').className = 
+                    document.getElementById('previousClub').value ? 'preview-value' : 'preview-value empty';
+                
+                document.getElementById('previewCurrentClub').textContent = 
+                    document.getElementById('currentClub').value || 'None';
+                document.getElementById('previewCurrentClub').className = 
+                    document.getElementById('currentClub').value ? 'preview-value' : 'preview-value empty';
+                
+                const competitions = Array.from(document.querySelectorAll('input[name="competitions"]:checked'))
+                    .map(cb => cb.value).join(', ') || 'None';
+                document.getElementById('previewCompetitions').textContent = competitions;
+                document.getElementById('previewCompetitions').className = 
+                    competitions !== 'None' ? 'preview-value' : 'preview-value empty';
+                
+                // Update manager/coach details
+                document.getElementById('previewManagerName').textContent = 
+                    document.getElementById('managerName').value || 'None provided';
+                document.getElementById('previewManagerName').className = 
+                    document.getElementById('managerName').value ? 'preview-value' : 'preview-value empty';
+                
+                document.getElementById('previewManagerContact').textContent = 
+                    document.getElementById('managerContact').value || 'None provided';
+                document.getElementById('previewManagerContact').className = 
+                    document.getElementById('managerContact').value ? 'preview-value' : 'preview-value empty';
+                
+                // Update player profile
+                document.getElementById('previewPosition').textContent = 
+                    document.getElementById('position').value || 'Not specified';
+                document.getElementById('previewPosition').className = 
+                    document.getElementById('position').value ? 'preview-value' : 'preview-value empty';
+                
+                const legSelected = document.querySelector('input[name="leg"]:checked');
+                document.getElementById('previewLeg').textContent = 
+                    legSelected ? legSelected.value : 'Not specified';
+                document.getElementById('previewLeg').className = 
+                    legSelected ? 'preview-value' : 'preview-value empty';
+                
+                document.getElementById('previewAbility').textContent = 
+                    document.getElementById('strongestAbility').value || 'Not specified';
+                document.getElementById('previewAbility').className = 
+                    document.getElementById('strongestAbility').value ? 'preview-value' : 'preview-value empty';
+                
+                // Update health information
+                document.getElementById('previewHealth').textContent = 
+                    document.getElementById('healthConditions').value || 'No health conditions specified';
+                document.getElementById('previewHealth').className = 
+                    document.getElementById('healthConditions').value ? 'preview-value' : 'preview-value empty';
+                
+                // Update commitment
+                const joinClubSelected = document.querySelector('input[name="joinClub"]:checked');
+                document.getElementById('previewJoinClub').textContent = 
+                    joinClubSelected ? joinClubSelected.value : 'Not specified';
+                document.getElementById('previewJoinClub').className = 
+                    joinClubSelected ? 'preview-value' : 'preview-value empty';
+                
+                const screeningSelected = document.querySelector('input[name="screening"]:checked');
+                document.getElementById('previewScreening').textContent = 
+                    screeningSelected ? screeningSelected.value : 'Not specified';
+                document.getElementById('previewScreening').className = 
+                    screeningSelected ? 'preview-value' : 'preview-value empty';
+            }
+            
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            }
+            
+            function closeModal() {
+                previewModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            async function submitRegistration() {
+                if (isSubmitting) return;
+                
+                isSubmitting = true;
+                
+                // Collect form data
+                const formData = new FormData();
+                
+                // Add the uploaded image if exists
+                if (uploadedImage) {
+                    formData.append('playerPhoto', uploadedImage);
+                }
+                
+                // Add all form fields
+                const formElements = form.elements;
+                for (let i = 0; i < formElements.length; i++) {
+                    const element = formElements[i];
                     
-                    // Add all form fields
-                    const formElements = form.elements;
-                    for (let i = 0; i < formElements.length; i++) {
-                        const element = formElements[i];
-                        
-                        if (element.type === 'checkbox') {
-                            if (element.checked) {
-                                formData.append(element.name, element.value);
-                            }
-                        } else if (element.type === 'radio') {
-                            if (element.checked) {
-                                formData.append(element.name, element.value);
-                            }
-                        } else if (element.name && element.type !== 'file' && element.type !== 'button' && element.type !== 'submit') {
+                    if (element.type === 'checkbox') {
+                        if (element.checked) {
                             formData.append(element.name, element.value);
                         }
-                    }
-                    
-                    // Calculate final age
-                    let finalAge;
-                    const manualAge = parseInt(ageManualInput.value);
-                    if (dobInput.value) {
-                        const birthDate = new Date(dobInput.value);
-                        const calculatedAge = calculateAge(birthDate);
-                        
-                        if (!isNaN(manualAge) && manualAge >= 16 && manualAge <= 45) {
-                            finalAge = manualAge;
-                        } else {
-                            finalAge = calculatedAge;
+                    } else if (element.type === 'radio') {
+                        if (element.checked) {
+                            formData.append(element.name, element.value);
                         }
-                        formData.append('age', finalAge);
+                    } else if (element.name && element.type !== 'file' && element.type !== 'button' && element.type !== 'submit') {
+                        formData.append(element.name, element.value);
                     }
+                }
+                
+                // Calculate final age
+                let finalAge;
+                const manualAge = parseInt(ageManualInput.value);
+                if (dobInput.value) {
+                    const birthDate = new Date(dobInput.value);
+                    const calculatedAge = calculateAge(birthDate);
                     
-                    // Show loading state
-                    const submitBtn = form.querySelector('.submit-btn');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                    submitBtn.disabled = true;
-                    
-                    // In a real application, you would send the formData to a server
-                    // For this demo, we'll simulate a server response
-                    fetch('http://localhost:500/api/player-application', {
-                        method: 'POST',
+                    if (!isNaN(manualAge) && manualAge >= 16 && manualAge <= 45) {
+                        finalAge = manualAge;
+                    } else {
+                        finalAge = calculatedAge;
+                    }
+                    formData.append('age', finalAge);
+                }
+                
+                // Show loading state
+                modalSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                modalSubmit.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                submitBtn.disabled = true;
+                
+                try {
+                    const res = await fetch("http://localhost:500/api/player-application", {
+                        method: "POST",
                         body: formData
-                    })
-                    .then(async (response) => {
-                        if (!response.ok) {
-                            const errorData = await response.json();
-                            throw new Error(errorData.message || 'Submission failed');
-                        }
-                        console.log(response);
+                    });
+
+                    const data = await res.json();
+
+                    if (!res.ok) {
+                        throw new Error(data.message || 'Submission failed');
+                    }
+
+                    if (data.status === "success") {
+                        const actualData = data.data;
                         
-                        return response.json();
-                    })
-                    .then((data) => {
                         // Hide form
                         form.style.display = 'none';
 
@@ -1007,29 +1535,38 @@
                         const successDetails = document.getElementById('successDetails');
                         successDetails.innerHTML = `
                             <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin-top: 15px;">
-                                <p><strong>Name:</strong> ${data.fullName || document.getElementById('fullName').value}</p>
-                                <p><strong>Age:</strong> ${data.age || finalAge} years</p>
-                                <p><strong>Phone:</strong> ${document.getElementById('phone').value}</p>
-                                <p><strong>Email:</strong> ${document.getElementById('email').value}</p>
+                                <p><strong>Name:</strong> ${actualData.fullName}</p>
+                                <p><strong>Age:</strong> ${actualData.age} years</p>
+                                <p><strong>Phone:</strong> ${actualData.phone}</p>
+                                <p><strong>Email:</strong> ${actualData.email}</p>
                                 <p><strong>Status:</strong> Application submitted successfully</p>
+                                <p><strong>Registration ID:</strong> TFC-${actualData._id.slice(-10)}</p>
                             </div>
                         `;
-                    })
-                    .catch((error) => {
+                    } else {
                         Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning!',
-                            text: error.message || 'Something went wrong. Please try again.',
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message || 'Something went wrong. Please try again.',
                             confirmButtonColor: '#004924'
                         });
-                    })
-                    .finally(() => {
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
+                    }
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.message || 'Failed to submit registration. Please check your connection and try again.',
+                        confirmButtonColor: '#004924'
                     });
-
+                } finally {
+                    // Reset buttons
+                    modalSubmit.innerHTML = '<i class="fas fa-paper-plane"></i> Confirm & Submit';
+                    modalSubmit.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+                    submitBtn.disabled = false;
+                    isSubmitting = false;
                 }
-            });
+            }
             
             // Real-time validation for fields
             const fieldsToValidate = ['fullName', 'phone', 'email', 'address'];
@@ -1068,16 +1605,12 @@
                 }
             });
             
-            // Set maximum date to ensure minimum age of 16
-            const today = new Date();
-            const maxDate = new Date();
-            maxDate.setFullYear(today.getFullYear() - 16);
-            dobInput.max = maxDate.toISOString().split('T')[0];
-            
-            // Set minimum date to ensure maximum age of 45
-            const minDate = new Date();
-            minDate.setFullYear(today.getFullYear() - 45);
-            dobInput.min = minDate.toISOString().split('T')[0];
+            // Show submit button only after preview
+            previewBtn.addEventListener('click', function() {
+                if (validateForm()) {
+                    submitBtn.style.display = 'block';
+                }
+            });
         });
     </script>
 </body>
