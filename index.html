@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telu Football Club - Player Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #F58220;
+            --secondary: #004924;
+            --accent: #fbbf24;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #004924 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 20px auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-bottom: 5px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .club-logo {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            line-height: 80px;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            border: 3px solid var(--accent);
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .form-group {
+            flex: 1 1 300px;
+            padding: 0 10px;
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--secondary);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-option input, .checkbox-option input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto 0;
+            padding: 15px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .error-message {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-message i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .age-display {
+            display: inline-block;
+            background: #e0f2fe;
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .age-container {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        .age-auto {
+            flex: 2;
+        }
+
+        .age-manual {
+            flex: 1;
+        }
+
+        .info-tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+            color: var(--gray);
+            cursor: help;
+        }
+
+        .info-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        .info-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .info-tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--dark) transparent transparent transparent;
+        }
+
+        /* Image Upload Styles */
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-container:hover {
+            border-color: var(--primary);
+            background: #f1f5f9;
+        }
+
+        .upload-container.drag-over {
+            border-color: var(--primary);
+            background: #e0f2fe;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .upload-text h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .upload-text p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .upload-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .upload-btn:hover {
+            background: #1e40af;
+        }
+
+        .image-preview {
+            width: 100%;
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .preview-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+
+        .remove-image {
+            display: block;
+            margin-top: 10px;
+            color: var(--secondary);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .remove-image:hover {
+            text-decoration: underline;
+        }
+
+        .upload-requirements {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        .upload-requirements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .upload-requirements li {
+            margin-bottom: 5px;
+        }
+
+        .upload-requirements i {
+            color: var(--primary);
+            margin-right: 5px;
+        }
+
+        .photo-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .form-group {
+                flex: 1 1 100%;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .age-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .photo-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="./image/telu-logo.png" alt="telu logo">
+            <p>Player Registration & Screening Form</p>
+            <p><strong>Screening Date:</strong> 3rd January, 2025</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            <h2>Registration Successful!</h2>
+            <p>Thank you for registering with Telu Football Club. We'll contact you soon regarding the screening process.</p>
+            <div id="successDetails"></div>
+        </div>
+
+        <form id="playerForm" class="form-container">
+            <!-- Personal Information Section with Photo -->
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-user"></i> Personal Information</h2>
+                
+                <div class="photo-section">
+                    <div class="form-group">
+                        <div class="upload-container" id="uploadContainer">
+                            <div class="upload-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="upload-text">
+                                <h3>Upload Player Photo</h3>
+                                <p>Click to browse or drag and drop</p>
+                                <button type="button" class="upload-btn" id="browseBtn">Browse Files</button>
+                            </div>
+                            <input type="file" id="playerPhoto" name="playerPhoto" accept="image/*" style="display: none;">
+                            
+                            <div class="image-preview" id="imagePreview">
+                                <img id="previewImage" class="preview-image" src="" alt="Player Photo Preview">
+                                <span class="remove-image" id="removeImage">Remove Photo</span>
+                            </div>
+                            
+                            <div class="upload-requirements">
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Max file size: 5MB</li>
+                                    <li><i class="fas fa-check-circle"></i> Supported formats: JPG, PNG</li>
+                                    <li><i class="fas fa-check-circle"></i> Passport-style photo recommended</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName" class="required">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                                <div class="error-message" id="fullNameError">Please enter your full name</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dob" class="required">Date of Birth</label>
+                                <input type="date" id="dob" name="dob" required>
+                                <div class="error-message" id="dobError">Please enter your date of birth</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="age-container">
+                                    <div class="age-manual">
+                                        <label for="ageManual">
+                                            Age
+                                            <span class="info-tooltip">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span class="tooltip-text">Enter your age</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="ageManual" name="ageManual" min="16" max="45" placeholder="Enter age">
+                                    </div>
+                                </div>
+                                <div class="error-message" id="ageError">Please enter a valid age (16-45 years)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone" class="required">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="e.g., 08012345678" required>
+                        <div class="error-message" id="phoneError">Please enter a valid Nigerian phone number</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="required">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="address" class="required">Residential Address</label>
+                        <textarea id="address" name="address" rows="3" required></textarea>
+                        <div class="error-message" id="addressError">Please enter your address</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Football Background Section -->
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-futbol"></i> Football Background</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="previousClub">Previous Club(s)</label>
+                        <input type="text" id="previousClub" name="previousClub" placeholder="If none, leave blank">
+                    </div>
+                    <div class="form-group">
+                        <label for="currentClub">Current Club</label>
+                        <input type="text" id="currentClub" name="currentClub" placeholder="If none, leave blank">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Have you played in any of the following competitions?</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="nlo1" name="competitions" value="NLO 1">
+                            <label for="nlo1">NLO 1 (Nigeria Premier League)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="nnl" name="competitions" value="NNL">
+                            <label for="nnl">NNL</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="nlo2" name="competitions" value="NLO 2">
+                            <label for="nlo2">NLO 2</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="faCup" name="competitions" value="FA Cup">
+                            <label for="faCup">FA Cup</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="others" name="competitions" value="Others">
+                            <label for="others">Others</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manager/Coach Details -->
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-user-tie"></i> Manager/Coach Details</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="managerName">Name of Manager/Coach</label>
+                        <input type="text" id="managerName" name="managerName">
+                    </div>
+                    <div class="form-group">
+                        <label for="managerContact">Contact of Manager/Coach</label>
+                        <input type="text" id="managerContact" name="managerContact">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Profile -->
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-running"></i> Player Profile</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Position</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="text" id="position" name="position">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Strongest Leg</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="legLeft" name="leg" value="Left">
+                                <label for="legLeft">Left</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="legRight" name="leg" value="Right">
+                                <label for="legRight">Right</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="strongestAbility">What is your strongest ability?</label>
+                        <textarea id="strongestAbility" name="strongestAbility" rows="3" placeholder="Describe your strongest football ability (e.g., dribbling, shooting, defending, speed, etc.)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Information -->
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-heartbeat"></i> Health Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="healthConditions">Any health conditions? Please specify</label>
+                        <textarea id="healthConditions" name="healthConditions" rows="3" placeholder="If none, please type 'None' or 'No known health conditions'"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commitment -->
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-handshake"></i> Commitment</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required">Are you ready to join TELU FOOTBALL CLUB?</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="joinYes" name="joinClub" value="Yes" required>
+                                <label for="joinYes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="joinNo" name="joinClub" value="No" required>
+                                <label for="joinNo">No</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="joinClubError">Please select an option</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Are you ready to resume for screening on 3rd January?</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="screeningYes" name="screening" value="Yes" required>
+                                <label for="screeningYes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="screeningNo" name="screening" value="No" required>
+                                <label for="screeningNo">No</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="screeningError">Please select an option</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Submit Registration
+            </button>
+        </form>
+
+        <div class="footer">
+            <p>Telu Football Club &copy; 2025 | All Rights Reserved</p>
+            <p>For inquiries, contact: +234 800 123 4567 | info@telufc.com</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('playerForm');
+            const successMessage = document.getElementById('successMessage');
+            const dobInput = document.getElementById('dob');
+            const ageAutoInput = document.getElementById('ageAuto');
+            const ageManualInput = document.getElementById('ageManual');
+            const ageDisplay = document.getElementById('ageDisplay');
+            
+            // Image upload elements
+            const uploadContainer = document.getElementById('uploadContainer');
+            const playerPhotoInput = document.getElementById('playerPhoto');
+            const browseBtn = document.getElementById('browseBtn');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImage = document.getElementById('previewImage');
+            const removeImageBtn = document.getElementById('removeImage');
+            
+            let uploadedImage = null;
+            
+            // Image upload functionality
+            browseBtn.addEventListener('click', function() {
+                playerPhotoInput.click();
+            });
+            
+            uploadContainer.addEventListener('click', function(e) {
+                if (e.target !== browseBtn && e.target !== playerPhotoInput) {
+                    playerPhotoInput.click();
+                }
+            });
+            
+            playerPhotoInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const file = this.files[0];
+                    
+                    // Validate file type
+                    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                    if (!validTypes.includes(file.type)) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'Please upload a valid image file (JPG or PNG only).',
+                            confirmButtonColor: '#004924'
+                        });
+                        return;
+                    }
+                    
+                    // Validate file size (5MB max)
+                    if (file.size > 5 * 1024 * 1024) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'File size too large. Maximum size is 5MB.',
+                            confirmButtonColor: '#004924'
+                        });
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                        uploadContainer.style.borderStyle = 'solid';
+                        uploadContainer.style.borderColor = '#10b981';
+                        uploadedImage = file;
+                    }
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Drag and drop functionality
+            uploadContainer.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+            });
+            
+            uploadContainer.addEventListener('dragleave', function() {
+                this.classList.remove('drag-over');
+            });
+            
+            uploadContainer.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    playerPhotoInput.files = e.dataTransfer.files;
+                    
+                    // Trigger change event
+                    const event = new Event('change', { bubbles: true });
+                    playerPhotoInput.dispatchEvent(event);
+                }
+            });
+            
+            // Remove image functionality
+            removeImageBtn.addEventListener('click', function() {
+                previewImage.src = '';
+                imagePreview.style.display = 'none';
+                uploadContainer.style.borderStyle = 'dashed';
+                uploadContainer.style.borderColor = '#cbd5e1';
+                playerPhotoInput.value = '';
+                uploadedImage = null;
+            });
+            
+            // Calculate age from date of birth
+            function calculateAge(birthDate) {
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return age;
+            }
+            
+            // Update age when date of birth changes
+            // dobInput.addEventListener('change', function() {
+            //     if (this.value) {
+            //         const birthDate = new Date(this.value);
+            //         const age = calculateAge(birthDate);
+                    
+            //         // Update auto-calculated age field
+            //         ageAutoInput.value = age + ' years';
+                    
+            //         // Show age display with formatted text
+            //         ageDisplay.textContent = `Player Age: ${age} years`;
+            //         ageDisplay.style.display = 'inline-block';
+                    
+            //         // Pre-fill manual age field if empty
+            //         if (!ageManualInput.value) {
+            //             ageManualInput.value = age;
+            //         }
+                    
+            //         // Validate age range for football (typically 16-45)
+            //         if (age < 16) {
+            //             ageDisplay.style.backgroundColor = '#fef2f2';
+            //             ageDisplay.style.color = '#dc2626';
+            //             ageDisplay.innerHTML = `Player Age: ${age} years <span style="font-size:0.8em;">(Minimum age is 16)</span>`;
+            //         } else if (age > 45) {
+            //             ageDisplay.style.backgroundColor = '#fef2f2';
+            //             ageDisplay.style.color = '#dc2626';
+            //             ageDisplay.innerHTML = `Player Age: ${age} years <span style="font-size:0.8em;">(Maximum age is 45)</span>`;
+            //         } else {
+            //             ageDisplay.style.backgroundColor = '#e0f2fe';
+            //             ageDisplay.style.color = 'var(--primary)';
+            //         }
+            //     } else {
+            //         ageAutoInput.value = '';
+            //         ageDisplay.style.display = 'none';
+            //     }
+            // });
+            
+            // Sync manual age with auto-calculated age if user changes it
+            // ageManualInput.addEventListener('input', function() {
+            //     const manualAge = parseInt(this.value);
+            //     if (!isNaN(manualAge) && manualAge > 0) {
+            //         if (manualAge < 16 || manualAge > 45) {
+            //             document.getElementById('ageError').style.display = 'block';
+            //         } else {
+            //             document.getElementById('ageError').style.display = 'none';
+            //         }
+            //     }
+            // });
+            
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                const requiredFields = form.querySelectorAll('[required]');
+                
+                // Clear previous error messages
+                document.querySelectorAll('.error-message').forEach(error => {
+                    error.style.display = 'none';
+                });
+                
+                // Validate each required field
+                requiredFields.forEach(field => {
+                    const errorId = field.id + 'Error';
+                    const errorElement = document.getElementById(errorId);
+                    
+                    if (field.type === 'radio') {
+                        const radioName = field.name;
+                        const radioGroup = form.querySelectorAll(`input[name="${radioName}"]:checked`);
+                        
+                        if (radioGroup.length === 0) {
+                            const radioError = document.getElementById(radioName + 'Error');
+                            if (radioError) {
+                                radioError.style.display = 'block';
+                                isValid = false;
+                            }
+                        }
+                    } else if (!field.value.trim()) {
+                        if (errorElement) {
+                            errorElement.style.display = 'block';
+                            isValid = false;
+                        }
+                    }
+                });
+                
+                // Validate email format
+                const emailField = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (emailField.value && !emailRegex.test(emailField.value)) {
+                    emailError.textContent = 'Please enter a valid email address';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate phone number (Nigerian format)
+                const phoneField = document.getElementById('phone');
+                const phoneError = document.getElementById('phoneError');
+                const phoneRegex = /^(?:\+234|0)[789][01]\d{8}$/;
+                
+                if (phoneField.value && !phoneRegex.test(phoneField.value.replace(/\s+/g, ''))) {
+                    phoneError.textContent = 'Please enter a valid Nigerian phone number (e.g., 08012345678 or +2348012345678)';
+                    phoneError.style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate age
+                const manualAge = parseInt(ageManualInput.value);
+                const dobValue = dobInput.value;
+                
+                if (!dobValue) {
+                    document.getElementById('dobError').style.display = 'block';
+                    isValid = false;
+                } else if (!isNaN(manualAge) && (manualAge < 16 || manualAge > 45)) {
+                    document.getElementById('ageError').style.display = 'block';
+                    isValid = false;
+                } else if (dobValue) {
+                    const birthDate = new Date(dobValue);
+                    const calculatedAge = calculateAge(birthDate);
+                    
+                    if (calculatedAge < 16 || calculatedAge > 45) {
+                        document.getElementById('ageError').textContent = 'Age must be between 16 and 45 years for registration';
+                        document.getElementById('ageError').style.display = 'block';
+                        isValid = false;
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    // Collect form data
+                    const formData = new FormData();
+                    
+                    // Add the uploaded image if exists
+                    if (uploadedImage) {
+                        formData.append('playerPhoto', uploadedImage);
+                    }
+                    
+                    // Add all form fields
+                    const formElements = form.elements;
+                    for (let i = 0; i < formElements.length; i++) {
+                        const element = formElements[i];
+                        
+                        if (element.type === 'checkbox') {
+                            if (element.checked) {
+                                formData.append(element.name, element.value);
+                            }
+                        } else if (element.type === 'radio') {
+                            if (element.checked) {
+                                formData.append(element.name, element.value);
+                            }
+                        } else if (element.name && element.type !== 'file' && element.type !== 'button' && element.type !== 'submit') {
+                            formData.append(element.name, element.value);
+                        }
+                    }
+                    
+                    // Calculate final age
+                    let finalAge;
+                    const manualAge = parseInt(ageManualInput.value);
+                    if (dobInput.value) {
+                        const birthDate = new Date(dobInput.value);
+                        const calculatedAge = calculateAge(birthDate);
+                        
+                        if (!isNaN(manualAge) && manualAge >= 16 && manualAge <= 45) {
+                            finalAge = manualAge;
+                        } else {
+                            finalAge = calculatedAge;
+                        }
+                        formData.append('age', finalAge);
+                    }
+                    
+                    // Show loading state
+                    const submitBtn = form.querySelector('.submit-btn');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    submitBtn.disabled = true;
+                    
+                    // In a real application, you would send the formData to a server
+                    // For this demo, we'll simulate a server response
+                    fetch('http://localhost:500/api/player-application', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(async (response) => {
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.message || 'Submission failed');
+                        }
+                        console.log(response);
+                        
+                        return response.json();
+                    })
+                    .then((data) => {
+                        // Hide form
+                        form.style.display = 'none';
+
+                        // Show success message
+                        successMessage.style.display = 'block';
+
+                        const successDetails = document.getElementById('successDetails');
+                        successDetails.innerHTML = `
+                            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <p><strong>Name:</strong> ${data.fullName || document.getElementById('fullName').value}</p>
+                                <p><strong>Age:</strong> ${data.age || finalAge} years</p>
+                                <p><strong>Phone:</strong> ${document.getElementById('phone').value}</p>
+                                <p><strong>Email:</strong> ${document.getElementById('email').value}</p>
+                                <p><strong>Status:</strong> Application submitted successfully</p>
+                            </div>
+                        `;
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning!',
+                            text: error.message || 'Something went wrong. Please try again.',
+                            confirmButtonColor: '#004924'
+                        });
+                    })
+                    .finally(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    });
+
+                }
+            });
+            
+            // Real-time validation for fields
+            const fieldsToValidate = ['fullName', 'phone', 'email', 'address'];
+            fieldsToValidate.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.addEventListener('blur', function() {
+                        const errorId = this.id + 'Error';
+                        const errorElement = document.getElementById(errorId);
+                        
+                        if (this.hasAttribute('required') && !this.value.trim()) {
+                            if (errorElement) {
+                                errorElement.style.display = 'block';
+                            }
+                        } else if (errorElement) {
+                            errorElement.style.display = 'none';
+                        }
+                        
+                        // Special validation for email and phone
+                        if (fieldId === 'email' && this.value.trim()) {
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(this.value)) {
+                                errorElement.textContent = 'Please enter a valid email address';
+                                errorElement.style.display = 'block';
+                            }
+                        }
+                        
+                        if (fieldId === 'phone' && this.value.trim()) {
+                            const phoneRegex = /^(?:\+234|0)[789][01]\d{8}$/;
+                            if (!phoneRegex.test(this.value.replace(/\s+/g, ''))) {
+                                errorElement.textContent = 'Please enter a valid Nigerian phone number';
+                                errorElement.style.display = 'block';
+                            }
+                        }
+                    });
+                }
+            });
+            
+            // Set maximum date to ensure minimum age of 16
+            const today = new Date();
+            const maxDate = new Date();
+            maxDate.setFullYear(today.getFullYear() - 16);
+            dobInput.max = maxDate.toISOString().split('T')[0];
+            
+            // Set minimum date to ensure maximum age of 45
+            const minDate = new Date();
+            minDate.setFullYear(today.getFullYear() - 45);
+            dobInput.min = minDate.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>
