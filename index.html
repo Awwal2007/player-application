@@ -714,7 +714,7 @@
                                 <p>Click to browse or drag and drop</p>
                                 <button type="button" class="upload-btn" id="browseBtn">Browse Files</button>
                             </div>
-                            <input type="file" id="playerPhoto" name="playerPhoto" accept="image/*" style="display: none;">
+                            <input type="file" id="playerPhoto" name="playerPhoto" accept="image/*" style="display: none;" required>
                             
                             <div class="image-preview" id="imagePreview">
                                 <img id="previewImage" class="preview-image" src="" alt="Player Photo Preview">
@@ -768,17 +768,35 @@
                             <div class="radio-group">
                                 <div class="radio-option">
                                     <!-- <label for="nextOfKinName">Left</label> -->
-                                    <input type="text" placeholder="Next of kin name" id="nextOfKinName" name="nextOfKinName">
+                                    <input type="text" placeholder="Next of kin name" id="nextOfKinName" name="nextOfKinName" required>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="number" id="nextOfKinPhone" placeholder="Next of kin phone no." name="nextOfKinPhone">
+                                    <input type="number" id="nextOfKinPhone" placeholder="Next of kin phone no." name="nextOfKinPhone" required>
                                     <!-- <label for="nextOfKinPhone">Right</label> -->
                                 </div>
                                 <div class="radio-option">
-                                    <input type="text" id="nextOfKinRelationship" placeholder="Relationship with next of kin" name="nextOfKinRelationship" >
+                                    <input type="text" id="nextOfKinRelationship" placeholder="Relationship with next of kin" name="nextOfKinRelationship" required>
                                     <!-- <label for="nextOfKinRelationship">Right</label> -->
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Do you have an International Passport?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="internationalPassport" name="internationalPassport" value="Yes" required>
+                                    <label for="internationalPassport">Yes</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="internationalPassportExpired" name="internationalPassport" value="Yes but expired" required>
+                                    <label for="internationalPassportExpired">Yes but expired</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="noInternationalPassport" name="internationalPassport" value="No" required>
+                                    <label for="noInternationalPassport">No</label>
+                                </div>
+                            </div>
+                            <div class="error-message" id="passportError">Please select an option</div>
                         </div>
                     </div>
                 </div>
@@ -1075,6 +1093,14 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="preview-section">
+                    <h3 class="preview-title"><i class="fas fa-passport"></i> International Passport</h3>
+                    <div class="preview-item">
+                        <div class="preview-label">International Passport Status</div>
+                        <div class="preview-value" id="previewPassport">Not specified</div>
+                    </div>
+                </div>
             </div>
             
             <div class="modal-footer">
@@ -1331,6 +1357,16 @@
                     phoneError.style.display = 'block';
                     isValid = false;
                 }
+
+                // Validate international passport radio group
+                const passportGroup = form.querySelectorAll('input[name="internationalPassport"]:checked');
+                if (passportGroup.length === 0) {
+                    const passportError = document.getElementById('passportError'); // Fixed ID
+                    if (passportError) {
+                        passportError.style.display = 'block';
+                        isValid = false;
+                    }
+                }
                 
                 // Validate age
                 const manualAge = parseInt(ageManualInput.value);
@@ -1487,6 +1523,13 @@
                     screeningSelected ? screeningSelected.value : 'Not specified';
                 document.getElementById('previewScreening').className = 
                     screeningSelected ? 'preview-value' : 'preview-value empty';
+
+                
+                const passportSelected = document.querySelector('input[name="internationalPassport"]:checked');
+                document.getElementById('previewPassport').textContent = 
+                    passportSelected ? passportSelected.value : 'Not specified';
+                document.getElementById('previewPassport').className = 
+                    passportSelected ? 'preview-value' : 'preview-value empty';
             }
             
             function formatDate(dateString) {
@@ -1555,9 +1598,10 @@
                 modalSubmit.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
                 submitBtn.disabled = true;
+
                 
                 try {
-                    const res = await fetch("https://telu-fc-backend.onrender.com/api/player-application", {
+                    const res = await fetch("http://localhost:500/api/player-application", {
                         method: "POST",
                         body: formData
                     });
