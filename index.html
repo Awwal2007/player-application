@@ -56,6 +56,9 @@
             position: absolute;
             font-weight: 500;
             cursor: pointer;
+            display: block;
+            color: black;
+            text-decoration: none;
         }
 
         .header h1 {
@@ -678,9 +681,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="go-home">
+            <a target="_blank" href="https://telufootballclub.com/" class="go-home">
+                <i class="fa-solid fa-house"></i>
                 Go Home
-            </div>
+            </a>
             <img width="150" src="./image/telu-logo.png" alt="">
             <h1>Telu Football Club</h1>
             <p>Player Registration & Screening Form</p>
@@ -759,6 +763,23 @@
                                 <div class="error-message" id="ageError">Please enter a valid age (16-45 years)</div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Next Of Kin</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <!-- <label for="nextOfKinName">Left</label> -->
+                                    <input type="text" placeholder="Next of kin name" id="nextOfKinName" name="nextOfKinName">
+                                </div>
+                                <div class="radio-option">
+                                    <input type="number" id="nextOfKinPhone" placeholder="Next of kin phone no." name="nextOfKinPhone">
+                                    <!-- <label for="nextOfKinPhone">Right</label> -->
+                                </div>
+                                <div class="radio-option">
+                                    <input type="text" id="nextOfKinRelationship" placeholder="Relationship with next of kin" name="nextOfKinRelationship" >
+                                    <!-- <label for="nextOfKinRelationship">Right</label> -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -781,6 +802,7 @@
                         <div class="error-message" id="addressError">Please enter your address</div>
                     </div>
                 </div>
+
             </div>
 
             <!-- Football Background Section -->
@@ -865,6 +887,12 @@
                     <div class="form-group">
                         <label for="strongestAbility">What is your strongest ability?</label>
                         <textarea id="strongestAbility" name="strongestAbility" rows="3" placeholder="Describe your strongest football ability (e.g., dribbling, shooting, defending, speed, etc.)"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="injury">Any Previous Injury/Operation Specify</label>
+                        <textarea id="injury" name="injury" placeholder="Describe your Injury or Operation"></textarea>
                     </div>
                 </div>
             </div>
@@ -1072,6 +1100,7 @@
             // Form elements
             const dobInput = document.getElementById('dob');
             const ageManualInput = document.getElementById('ageManual');
+            const injuryInput = document.getElementById('injury');
             
             // Image upload elements
             const uploadContainer = document.getElementById('uploadContainer');
