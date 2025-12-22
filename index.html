@@ -52,6 +52,12 @@
             overflow: hidden;
         }
 
+        .go-home{
+            position: absolute;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
         .header h1 {
             color: var(--primary);
             font-size: 2.5rem;
@@ -392,7 +398,7 @@
             display: none;
             text-align: center;
             margin-top: 15px;
-}
+        }
 
         .preview-image {
             max-width: 200px;
@@ -628,6 +634,12 @@
         }
 
         @media (max-width: 768px) {
+            body{
+                padding-right: 0px;
+            }
+            .container{
+                margin: 0px auto;
+            }
             .form-group {
                 flex: 1 1 100%;
             }
@@ -666,10 +678,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="./image/telu-logo.png" alt="">
+            <div class="go-home">
+                Go Home
+            </div>
+            <img width="150" src="./image/telu-logo.png" alt="">
             <h1>Telu Football Club</h1>
             <p>Player Registration & Screening Form</p>
-            <p><strong>Screening Date:</strong> 3rd January, 2025</p>
+            <p><strong>Screening Date:</strong> 3rd January, 2026</p>
         </div>
 
         <div class="success-message" id="successMessage">
@@ -870,7 +885,7 @@
                 <h2 class="section-title"><i class="fas fa-handshake"></i> Commitment</h2>
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="required">Are you ready to join TELU FOOTBALL CLUB?</label>
+                        <label class="required">Are you ready to sign contract with TELU FOOTBALL CLUB?</label>
                         <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="joinYes" name="joinClub" value="Yes" required>
@@ -884,7 +899,7 @@
                         <div class="error-message" id="joinClubError">Please select an option</div>
                     </div>
                     <div class="form-group">
-                        <label class="required">Are you ready to resume for screening on 3rd January?</label>
+                        <label class="required">Are you ready to resume for screening on 3rd January 2026?</label>
                         <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="screeningYes" name="screening" value="Yes" required>
